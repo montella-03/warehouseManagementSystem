@@ -3,12 +3,15 @@ package com.warehouse.warehouseManagementSystem.service;
 import com.warehouse.warehouseManagementSystem.Repository.ProductRepository;
 import com.warehouse.warehouseManagementSystem.entity.Product;
 import com.warehouse.warehouseManagementSystem.model.ProductRequest;
+import com.warehouse.warehouseManagementSystem.model.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService{
@@ -31,6 +34,20 @@ public class ProductServiceImpl implements ProductService{
                 .build();
         productRepository.save(product);
         return product.getId();
+    }
+
+
+    @Override
+    public List<ProductResponse> getAll() {
+        List<Product> productList =
+                productRepository.findAll();
+
+        return productList.stream()
+                .map(product -> new ProductResponse
+                        (product.getProductName(),product.getQuantity(),product.getGrade(),
+                                product.getHandler(),product.getPeriod(),product.getId(),
+                                product.getReferenceCode()))
+                .collect(Collectors.toList());
     }
 
     private String generateRandomCode(Pattern pattern) {
