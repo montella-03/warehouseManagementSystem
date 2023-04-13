@@ -9,4 +9,6 @@ public interface ProductService {
     Integer addProduct(ProductRequest productRequest);
 
     List<ProductResponse> getAll();
+
+    Integer deleteProductById(Integer id);
 }

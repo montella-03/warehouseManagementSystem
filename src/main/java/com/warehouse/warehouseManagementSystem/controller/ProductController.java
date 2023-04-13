@@ -15,16 +15,25 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
     @PostMapping
     public ResponseEntity<Integer> receiveProduct
-            (@RequestBody ProductRequest productRequest){
+            (@RequestBody ProductRequest productRequest) {
         Integer request = productService.addProduct(productRequest);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
+
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> getProducts(){
+    public ResponseEntity<List<ProductResponse>> getProducts() {
         List<ProductResponse> productResponseList =
                 productService.getAll();
-        return new ResponseEntity<>(productResponseList,HttpStatus.OK);
+        return new ResponseEntity<>(productResponseList, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<Integer> deleteProductById(@PathVariable Integer id) {
+        Integer productResponse =
+                productService.deleteProductById(id);
+        return new ResponseEntity<>(productResponse, HttpStatus.OK);
     }
 }

@@ -50,6 +50,14 @@ public class ProductServiceImpl implements ProductService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Integer deleteProductById(Integer id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("error"));
+        productRepository.delete(product);
+        return product.getId();
+    }
+
     private String generateRandomCode(Pattern pattern) {
         Random random = new Random();
         String code;
