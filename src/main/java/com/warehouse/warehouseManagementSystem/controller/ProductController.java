@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@CrossOrigin(origins ="http://localhost:5173" )
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
+    @PostMapping("/product")
     public ResponseEntity<Integer> receiveProduct
             (@RequestBody ProductRequest productRequest) {
         Integer request = productService.addProduct(productRequest);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/product")
     public ResponseEntity<List<ProductResponse>> getProducts() {
         List<ProductResponse> productResponseList =
                 productService.getAll();
