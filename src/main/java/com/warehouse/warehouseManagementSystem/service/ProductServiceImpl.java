@@ -74,6 +74,26 @@ public class ProductServiceImpl implements ProductService{
         return product.getId();
     }
 
+    @Override
+    public ProductRequest updateProduct(ProductRequest productRequest, Integer id) {
+        Product product = productRepository.findById(id).orElseThrow
+                (()->new RuntimeException("product modified is not available"));
+        if(productRequest.product()!=null){
+            product.setProductName(productRequest.product());
+        }
+        if(productRequest.quantity()!=null){
+            product.setQuantity(productRequest.quantity());
+        }
+        if(productRequest.quality()!=null){
+            product.setGrade(productRequest.quality());
+        }
+        if(productRequest.handler()!=null){
+            product.setHandler(productRequest.handler());
+        }
+        productRepository.save(product);
+        return productRequest;
+    }
+
     private String generateRandomCode(Pattern pattern) {
         Random random = new Random();
         String code;

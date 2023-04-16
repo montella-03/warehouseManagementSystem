@@ -13,4 +13,6 @@ public interface ProductService {
     ProductResponse getById(Integer id);
 
     Integer getDeleteById(Integer id);
+
+    ProductRequest updateProduct(ProductRequest productRequest, Integer id);
 }

@@ -28,4 +28,11 @@ public class ProductController {
                 productService.getAll();
         return new ResponseEntity<>(productResponseList,HttpStatus.OK);
     }
+    @PutMapping("/product/{id}")
+    public ResponseEntity<ProductRequest> updateProduct
+            (@RequestBody ProductRequest productRequest, @PathVariable Integer id){
+       ProductRequest productRequest1 = productService.updateProduct(productRequest,id);
+        return new ResponseEntity<>(productRequest1,HttpStatus.OK);
+    }
+
 }
