@@ -10,5 +10,7 @@ public interface ProductService {
 
     List<ProductResponse> getAll();
 
-    Integer deleteProductById(Integer id);
+    ProductResponse getById(Integer id);
+
+    Integer getDeleteById(Integer id);
 }

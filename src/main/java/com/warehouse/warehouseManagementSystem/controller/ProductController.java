@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins ="http://localhost:5173" )
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -22,18 +22,10 @@ public class ProductController {
         Integer request = productService.addProduct(productRequest);
         return new ResponseEntity<>(request, HttpStatus.OK);
     }
-
-    @GetMapping("/product")
-    public ResponseEntity<List<ProductResponse>> getProducts() {
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> getProducts(){
         List<ProductResponse> productResponseList =
                 productService.getAll();
-        return new ResponseEntity<>(productResponseList, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/product/{id}")
-    public ResponseEntity<Integer> deleteProductById(@PathVariable Integer id) {
-        Integer productResponse =
-                productService.deleteProductById(id);
-        return new ResponseEntity<>(productResponse, HttpStatus.OK);
+        return new ResponseEntity<>(productResponseList,HttpStatus.OK);
     }
 }

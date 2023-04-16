@@ -50,10 +50,26 @@ public class ProductServiceImpl implements ProductService{
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public Integer deleteProductById(Integer id) {
+//        Product product = productRepository.findById(id)
+//                .orElseThrow(()->new RuntimeException("error"));
+//        productRepository.delete(product);
+//        return product.getId();
+//    }
+
     @Override
-    public Integer deleteProductById(Integer id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(()->new RuntimeException("error"));
+    public ProductResponse getById(Integer id) {
+        Product product = productRepository.findById(id).orElseThrow(
+                ()->new RuntimeException("message"));
+        return new ProductResponse(product.getProductName(),product.getQuantity(),
+                product.getGrade(),product.getHandler(),product.getPeriod(),
+                product.getId(),product.getReferenceCode());
+    }
+
+    @Override
+    public Integer getDeleteById(Integer id) {
+        Product product = productRepository.findById(id).get();
         productRepository.delete(product);
         return product.getId();
     }
