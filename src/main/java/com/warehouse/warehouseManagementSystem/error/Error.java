@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class Error {
+    //error handling
     @ExceptionHandler(RuntimeException.class)
     public ProblemDetail problemDetail(RuntimeException exception){
         return ProblemDetail.forStatusAndDetail
