@@ -14,5 +14,6 @@ public interface ProductService {
 
     Integer getDeleteById(Integer id);
 
-    ProductRequest updateProduct(ProductRequest productRequest, Integer id);
+    String updateProduct(ProductRequest productRequest, Integer id);
+
 }

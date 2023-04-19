@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductRequest updateProduct(ProductRequest productRequest, Integer id) {
+    public String updateProduct(ProductRequest productRequest, Integer id) {
         Product product = productRepository.findById(id).orElseThrow
                 (()->new RuntimeException("product modified is not available"));
         if(productRequest.product()!=null){
@@ -91,8 +91,9 @@ public class ProductServiceImpl implements ProductService{
             product.setHandler(productRequest.handler());
         }
         productRepository.save(product);
-        return productRequest;
+        return product.getQuantity();
     }
+
 
     private String generateRandomCode(Pattern pattern) {
         Random random = new Random();

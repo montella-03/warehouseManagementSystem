@@ -28,11 +28,22 @@ public class ProductController {
                 productService.getAll();
         return new ResponseEntity<>(productResponseList,HttpStatus.OK);
     }
+    @GetMapping("/product/{id}")
+    public ResponseEntity<ProductResponse> getProductsById(@PathVariable int id){
+        ProductResponse product =
+                productService.getById(id);
+        return new ResponseEntity<>(product,HttpStatus.OK);
+    }
     @PutMapping("/product/{id}")
-    public ResponseEntity<ProductRequest> updateProduct
+    public ResponseEntity<String> updateProduct
             (@RequestBody ProductRequest productRequest, @PathVariable Integer id){
-       ProductRequest productRequest1 = productService.updateProduct(productRequest,id);
+       String productRequest1 = productService.updateProduct(productRequest,id);
         return new ResponseEntity<>(productRequest1,HttpStatus.OK);
+    }
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity<Integer> deleteProduct(@PathVariable int id){
+        Integer product = productService.getDeleteById(id);
+        return  new ResponseEntity<>(product,HttpStatus.OK);
     }
 
 }
