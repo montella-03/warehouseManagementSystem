@@ -6,14 +6,14 @@ import com.warehouse.sales.model.ProductResponse;
 import java.util.List;
 
 public interface ProductService {
-    Integer addProduct(ProductRequest productRequest);
+    Long addProduct(ProductRequest productRequest);
 
     List<ProductResponse> getAll();
 
-    ProductResponse getById(Integer id);
+    ProductResponse getById(Long id);
 
-    Integer getDeleteById(Integer id);
+    Long getDeleteById(Long id);
 
-    String updateProduct(ProductRequest productRequest, Integer id);
+    String updateProduct(ProductRequest productRequest, Long id);
 
 }

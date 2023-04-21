@@ -9,8 +9,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
-
 @Entity
 @Data
 @Builder
@@ -19,11 +17,11 @@ import java.time.Instant;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     private String productName;
-    private String grade;
     private String quantity;
-    private Instant period;
+    private Long price;
     private String referenceCode;
-    private String handler;
+    private String status;
+
 }

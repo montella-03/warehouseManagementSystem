@@ -7,7 +7,6 @@ import com.warehouse.sales.model.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -19,19 +18,19 @@ public class ProductServiceImpl implements ProductService{
     private ProductRepository productRepository;
 
     @Override
-    public Integer addProduct(ProductRequest productRequest) {
+    public Long addProduct(ProductRequest productRequest) {
         String regex = "^\\d{3}[a-zA-Z]{3}\\d{3}$";
         Pattern pattern = Pattern.compile(regex);
 
         String code = generateRandomCode(pattern);
         Product product = Product.builder()
                 .productName(productRequest.product())
-                .grade(productRequest.quality())
                 .quantity(productRequest.quantity())
-                .handler(productRequest.handler())
+                .price(productRequest.price())
                 .referenceCode(code)
-                .period(Instant.now())
+                .status("available")
                 .build();
+
         productRepository.save(product);
         return product.getId();
     }
@@ -44,8 +43,9 @@ public class ProductServiceImpl implements ProductService{
 
         return productList.stream()
                 .map(product -> new ProductResponse
-                        (product.getProductName(),product.getQuantity(),product.getGrade(),
-                                product.getHandler(),product.getPeriod(),product.getId(),
+                        (product.getProductName(),product.getQuantity(),
+                                product.getPrice(),
+                                product.getStatus(),product.getId(),
                                 product.getReferenceCode()))
                 .collect(Collectors.toList());
     }
@@ -59,23 +59,24 @@ public class ProductServiceImpl implements ProductService{
 //    }
 
     @Override
-    public ProductResponse getById(Integer id) {
+    public ProductResponse getById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
                 ()->new RuntimeException("message"));
         return new ProductResponse(product.getProductName(),product.getQuantity(),
-                product.getGrade(),product.getHandler(),product.getPeriod(),
+                product.getPrice(),product.getStatus(),
                 product.getId(),product.getReferenceCode());
     }
 
     @Override
-    public Integer getDeleteById(Integer id) {
-        Product product = productRepository.findById(id).get();
+    public Long getDeleteById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow
+                (()->new RuntimeException("product not found"));
         productRepository.delete(product);
         return product.getId();
     }
 
     @Override
-    public String updateProduct(ProductRequest productRequest, Integer id) {
+    public String updateProduct(ProductRequest productRequest, Long id) {
         Product product = productRepository.findById(id).orElseThrow
                 (()->new RuntimeException("product modified is not available"));
         if(productRequest.product()!=null){
@@ -84,12 +85,10 @@ public class ProductServiceImpl implements ProductService{
         if(productRequest.quantity()!=null){
             product.setQuantity(productRequest.quantity());
         }
-        if(productRequest.quality()!=null){
-            product.setGrade(productRequest.quality());
+        if(productRequest.price()!=null){
+            product.setPrice(productRequest.price());
         }
-        if(productRequest.handler()!=null){
-            product.setHandler(productRequest.handler());
-        }
+
         productRepository.save(product);
         return product.getQuantity();
     }
@@ -101,7 +100,7 @@ public class ProductServiceImpl implements ProductService{
         do {
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < 3; i++) {
-                builder.append(random.nextInt(10));
+                builder.append(random.nextInt(4));
             }
             for (int i = 0; i < 3; i++) {
                 int ascii = random.nextInt(17) + (random.nextBoolean() ? 33 : 58);
