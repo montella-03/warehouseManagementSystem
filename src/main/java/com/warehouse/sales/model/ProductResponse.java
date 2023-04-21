@@ -1,4 +1,4 @@
-package com.warehouse.warehouseManagementSystem.model;
+package com.warehouse.sales.model;
 
 import java.time.Instant;
 

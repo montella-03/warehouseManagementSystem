@@ -1,4 +1,4 @@
-package com.warehouse.warehouseManagementSystem.entity;
+package com.warehouse.sales.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

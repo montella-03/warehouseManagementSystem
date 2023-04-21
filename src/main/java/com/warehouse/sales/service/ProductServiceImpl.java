@@ -1,9 +1,9 @@
-package com.warehouse.warehouseManagementSystem.service;
+package com.warehouse.sales.service;
 
-import com.warehouse.warehouseManagementSystem.Repository.ProductRepository;
-import com.warehouse.warehouseManagementSystem.entity.Product;
-import com.warehouse.warehouseManagementSystem.model.ProductRequest;
-import com.warehouse.warehouseManagementSystem.model.ProductResponse;
+import com.warehouse.sales.Repository.ProductRepository;
+import com.warehouse.sales.entity.Product;
+import com.warehouse.sales.model.ProductRequest;
+import com.warehouse.sales.model.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

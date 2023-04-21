@@ -1,6 +1,6 @@
-package com.warehouse.warehouseManagementSystem.Repository;
+package com.warehouse.sales.Repository;
 
-import com.warehouse.warehouseManagementSystem.entity.Product;
+import com.warehouse.sales.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

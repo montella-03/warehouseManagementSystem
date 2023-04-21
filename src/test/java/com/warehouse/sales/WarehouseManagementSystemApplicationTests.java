@@ -1,4 +1,4 @@
-package com.warehouse.warehouseManagementSystem;
+package com.warehouse.sales;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

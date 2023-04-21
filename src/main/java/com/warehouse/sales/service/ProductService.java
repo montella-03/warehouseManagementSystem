@@ -1,7 +1,7 @@
-package com.warehouse.warehouseManagementSystem.service;
+package com.warehouse.sales.service;
 
-import com.warehouse.warehouseManagementSystem.model.ProductRequest;
-import com.warehouse.warehouseManagementSystem.model.ProductResponse;
+import com.warehouse.sales.model.ProductRequest;
+import com.warehouse.sales.model.ProductResponse;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.warehouse.warehouseManagementSystem.error;
+package com.warehouse.sales.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
