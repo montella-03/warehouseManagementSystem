@@ -19,7 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String productName;
-    private String quantity;
+    private Long quantity;
     private Long price;
     private String referenceCode;
     private String status;

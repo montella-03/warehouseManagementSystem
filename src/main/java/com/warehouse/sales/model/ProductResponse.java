@@ -3,6 +3,6 @@ package com.warehouse.sales.model;
 import java.time.Instant;
 
 public record ProductResponse
-        (String product, String quantity, Long price,
-         String status,Long productId,String code) {
+        (  Long id,String product, Long quantity, Long price,
+         String status,String code) {
 }

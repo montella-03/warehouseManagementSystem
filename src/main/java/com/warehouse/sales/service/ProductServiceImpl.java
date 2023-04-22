@@ -43,9 +43,9 @@ public class ProductServiceImpl implements ProductService{
 
         return productList.stream()
                 .map(product -> new ProductResponse
-                        (product.getProductName(),product.getQuantity(),
+                        (product.getId(),product.getProductName(),product.getQuantity(),
                                 product.getPrice(),
-                                product.getStatus(),product.getId(),
+                                product.getStatus(),
                                 product.getReferenceCode()))
                 .collect(Collectors.toList());
     }
@@ -62,9 +62,8 @@ public class ProductServiceImpl implements ProductService{
     public ProductResponse getById(Long id) {
         Product product = productRepository.findById(id).orElseThrow(
                 ()->new RuntimeException("message"));
-        return new ProductResponse(product.getProductName(),product.getQuantity(),
-                product.getPrice(),product.getStatus(),
-                product.getId(),product.getReferenceCode());
+        return new ProductResponse(product.getId(),product.getProductName(),product.getQuantity(),
+                product.getPrice(),product.getStatus(),product.getReferenceCode());
     }
 
     @Override
@@ -90,7 +89,7 @@ public class ProductServiceImpl implements ProductService{
         }
 
         productRepository.save(product);
-        return product.getQuantity();
+        return product.getProductName();
     }
 
 
