@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@CrossOrigin(origins = "")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -44,6 +45,18 @@ public class ProductController {
     public ResponseEntity<Long> deleteProduct(@PathVariable Long id){
         Long product = productService.getDeleteById(id);
         return  new ResponseEntity<>(product,HttpStatus.OK);
+    }
+    @PutMapping("/reduce/{id}")
+    public ResponseEntity<Void> reduceQuantity(@PathVariable Long id,
+                                               @RequestParam Long quantity){
+        productService.reduceQuantity(id,quantity);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PutMapping("/increase/{id}")
+    public ResponseEntity<Void> increaseQuantity(@PathVariable Long id,
+                                               @RequestParam Long quantity){
+         productService.increseQuantity(id,quantity);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

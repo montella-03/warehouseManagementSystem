@@ -16,4 +16,7 @@ public interface ProductService {
 
     String updateProduct(ProductRequest productRequest, Long id);
 
+    void reduceQuantity(Long id, Long quantity);
+
+    void increseQuantity(Long id, Long quantity);
 }

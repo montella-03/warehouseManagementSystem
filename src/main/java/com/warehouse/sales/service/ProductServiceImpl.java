@@ -92,6 +92,26 @@ public class ProductServiceImpl implements ProductService{
         return product.getProductName();
     }
 
+    @Override
+    public void reduceQuantity(Long id, Long quantity) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("product not found"));
+        if(product.getQuantity()<quantity)
+            throw new RuntimeException("Not enough quantity");
+        product.setQuantity(product.getQuantity()-quantity);
+        productRepository.save(product);
+
+    }
+
+    @Override
+    public void increseQuantity(Long id, Long quantity) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("product not found"));
+        product.setQuantity(product.getQuantity()+quantity);
+        productRepository.save(product);
+
+
+    }
 
     private String generateRandomCode(Pattern pattern) {
         Random random = new Random();
